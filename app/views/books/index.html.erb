@@ -6,7 +6,7 @@
 
 <body>
   <h1>Books</h1>
-  <table>
+ <table>
   <thead>
     <tr>
       <th>Title</th>
@@ -16,13 +16,19 @@
   </thead>
 
   <tbody>
-      <tr>
+
+    <tr>
+        <% @books.each do |book| %>
+          <span>
+      \   <%= link_to show, book_path %>
+          </span>
+        <% end %>
         <td>リーダブルコード</td>
         <td>より良いコードを書くためのシンプルで実践的なテクニック</td>
-        <td><a class="show_26084" href="/books/26084">Show</a></td>
+
         <td><a class="edit_26084" href="/books/26084/edit">Edit</a></td>
         <td><a data-confirm="Are you sure?" class="destroy_26084" rel="nofollow" data-method="delete" href="/books/26084">Destroy</a></td>
-      </tr>
+     </tr>
       <tr>
         <td>トラブル知らずのシステム設計</td>
         <td>システム設計の要点を図解で説明してくれます</td>
