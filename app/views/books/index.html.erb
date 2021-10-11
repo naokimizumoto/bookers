@@ -1,11 +1,5 @@
-<doctype html>
-  <html lang="ja">
-<head>
-   <meta charset="UTF-8">
- </head>
 
-<body>
-  <h1>Books</h1>
+<h1>Books</h1>
  <table>
   <thead>
     <tr>
@@ -17,66 +11,31 @@
 
   <tbody>
 
-    <tr>
-        <% @books.each do |book| %>
-          <span>
-      \   <%= link_to show, book_path %>
-          </span>
-        <% end %>
-        <td>リーダブルコード</td>
-        <td>より良いコードを書くためのシンプルで実践的なテクニック</td>
 
-        <td><a class="edit_26084" href="/books/26084/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26084" rel="nofollow" data-method="delete" href="/books/26084">Destroy</a></td>
-     </tr>
+
+<% @books.each do |book| %>
       <tr>
-        <td>トラブル知らずのシステム設計</td>
-        <td>システム設計の要点を図解で説明してくれます</td>
-        <td><a class="show_26085" href="/books/26085">Show</a></td>
-        <td><a class="edit_26085" href="/books/26085/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26085" rel="nofollow" data-method="delete" href="/books/26085">Destroy</a></td>
+          <td> <%= book.title %></td>
+          <td><%= book.body %></td>
+          <td> <%= link_to "show", book_path(book) %></td>
+          <td> <%= link_to "edit", edit_book_path(book) %></td>
+          <td> <%= link_to "destroy", book_path(book), method: :delete%></td>
       </tr>
-      <tr>
-        <td>たのしいRuby</td>
-        <td>Rubyの入門におすすめです</td>
-        <td><a class="show_26086" href="/books/26086">Show</a></td>
-        <td><a class="edit_26086" href="/books/26086/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26086" rel="nofollow" data-method="delete" href="/books/26086">Destroy</a></td>
-      </tr>
-      <tr>
-        <td>入門Git</td>
-        <td>gitについての基本操作から内部構造まで解説してくれます</td>
-        <td><a class="show_26087" href="/books/26087">Show</a></td>
-        <td><a class="edit_26087" href="/books/26087/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26087" rel="nofollow" data-method="delete" href="/books/26087">Destroy</a></td>
-      </tr>
-      <tr>
-        <td>アルゴリズム図鑑</td>
-        <td>アルゴリズムについてカラーイラストでしっかり解説してくれます</td>
-        <td><a class="show_26088" href="/books/26088">Show</a></td>
-        <td><a class="edit_26088" href="/books/26088/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26088" rel="nofollow" data-method="delete" href="/books/26088">Destroy</a></td>
-      </tr>
-      <tr>
-        <td>達人プログラマー</td>
-        <td>プログラマ入門者は必読！</td>
-        <td><a class="show_26089" href="/books/26089">Show</a></td>
-        <td><a class="edit_26089" href="/books/26089/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26089" rel="nofollow" data-method="delete" href="/books/26089">Destroy</a></td>
-      </tr>
-      <tr>
-        <td>データベース実践入門</td>
-        <td>効率的なSQL文を教えてくれます</td>
-        <td><a class="show_26090" href="/books/26090">Show</a></td>
-        <td><a class="edit_26090" href="/books/26090/edit">Edit</a></td>
-        <td><a data-confirm="Are you sure?" class="destroy_26090" rel="nofollow" data-method="delete" href="/books/26090">Destroy</a></td>
-      </tr>
-  </tbody>
+  <% end %>
+</tbody>
 </table>
+
+<% if @book.errors.any? %>
+    <%= @book.errors.count %>errors prohibited this book from being saved:<br>
+     <% @book.errors.full_messages.each do |message| %>
+        <%= message %>
+  <% end %>
+<% end %>
+
 
 <h2>New Book</h2>
 
-<%= form_with model:@Book, local:true do |f| %>
+<%= form_with model:@book, local:true do |f| %>
 
   <h4>Title</h4>
   <%= f.text_field :title %>
@@ -84,8 +43,6 @@
   <h4>Body</h4>
   <%= f.text_area :body %>
 
-  <%= f.submit 'Create Box' %>
+  <p><%= f.submit 'Create Book'%></p>
 <% end %>
 
-</body>
-</html>
